@@ -15,14 +15,40 @@ def flatten_entities(item) :
     # memo to call [flatten_entities(item) for item in raw_entities]
 
 
-def df_to_custom_markdown(df, out_format):
+def output_results(df, name):
+
+    if not df.empty:
+
+        ## clean data (remove id col and make ror types as string)
+        if "id" in df.columns: 
+            df.drop(columns=["id"], inplace=True)
+        if "ror_types" in df.columns: 
+            df["ror_types"] = df["ror_types"].apply(
+                lambda x: ", ".join(x) if isinstance(x, list) else x)
+
+        ## output markdown file
+        if name.endswith("md"): 
+            md_output = df_to_custom_markdown(df)
+            with open(name, "w", encoding="utf-8") as temp_file: 
+                temp_file.write(md_output)
+ 
+        ## output csv file
+        if name.endswith("csv"): 
+            df.to_csv(name, index = False, encoding = 'utf-8')
+
+        ## output stats in the consol
+        if "consortia" in name : 
+            print(f"ToDo verify new intermed (n={len(df)})\t{name}")
+        elif "funder" in name: 
+            print(f"ToDo verify new funder (n={len(df)})\t{name}")
+
+
+
+def df_to_custom_markdown(df):
     """
     export df as md
     Expected columns: name, country, ror_id, wiki_id, tsosi_link
-    """
-
-    if out_format != "md" : 
-        pass
+    """    
 
     one_bloc = []
     for _, row in df.iterrows():
@@ -47,8 +73,9 @@ def df_to_custom_markdown(df, out_format):
             entry_lines.append(str(wiki))
         
         if ror_types :
-            ror_types_str = str(",".join(ror_types))
-            entry_lines.append(ror_types_str )
+            if isinstance(ror_types, list): 
+                ror_types_str = str(",".join(ror_types))
+                entry_lines.append(ror_types_str )
 
         if tsosi_link is not None and not (pd.isna(tsosi_link) or str(tsosi_link).strip() == ""):
             url = str(tsosi_link).strip()
