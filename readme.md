@@ -2,7 +2,7 @@
 
 ## Goal
 
-From all the TSOSI entities, try to identify the following exclusive types: 
+From all the TSOSI entities, try to identify the following **unique types**: 
 
 - `infrastructure`
 
