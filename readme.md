@@ -2,11 +2,21 @@
 
 ## Goal
 
-From all the TSOSI entities, try to identify the following exclusive types: `infrastructure`, `library consortia`, `funding organisation`, `company`, and `other`.
+From all the TSOSI entities, try to identify the following exclusive types: 
+
+- `infrastructure`
+
+- `library consortia`
+
+- `funding organisation`
+
+- `company`
+
+- and `other`
 
 ## Repository logic
 
-`TSOSI-type-entities.csv` contains the classifications that have been done ergarding lib. consort. and funding org.
+`TSOSI-type-entities.csv` contains the classifications that have been done ergarding lib. consort. and funding org., and also pat of other.
 
 Files whose names start with a date are to be used manually to deduce the type.
 
@@ -20,7 +30,11 @@ Files whose names start with a date are to be used manually to deduce the type.
 * from _TSOSI-type-entities.csv_ and column _tsosi_type_: 
 
 `library consortia`, are marked `lib_consort`
+
 `funding organisation`, are marked `funder`
+
+`other` if the value does **not** match any of the values mapped above
+
 
 * from TSOSI entites
 
