@@ -58,3 +58,4 @@ Assigned first to entities in `TSOSI-type-entities.csv` whose `tsosi_type` is no
 - OpenAlex uses ROR types ([source](https://developers.openalex.org/api-reference/institution-types))
 - OCLC contains a list of [participating consortia](https://icolc.net/participating-consortia?page=3)
 - Science Europe contains a [list of funders](https://www.scienceeurope.org/about-us/members/)
+- Barcelona declaration on open research information contains a [list of signatories and supporters](https://barcelona-declaration.org/signatories/)
