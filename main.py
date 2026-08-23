@@ -79,6 +79,8 @@ df_possible_funders = df_funders[ mask_gov | mask_funder ].reset_index(drop=True
 df_possible_funders.drop_duplicates(subset=["id"], keep="first", inplace = True)
 
 
+# ____z____ output result
+
 ## just change file name extension to produce csv or md
 output_results(
 	df_possible_funders, 
