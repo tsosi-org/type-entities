@@ -4,7 +4,7 @@ Code and process to deduce _type_ field for all the TSOSI entities. A TSOSI enti
 This repository contains the code that is run to help the identifying process. Code is run when a new infrastructure or a new library consortium is included in TSOSI.
 
 
->>>> See the distribution of TSOSI types online: https://tsosi.org/api/stats
+**See the distribution of TSOSI types online: https://tsosi.org/api/stats**
 
 ## TSOSI types
 
@@ -50,6 +50,15 @@ Derived from the ROR registry and its `ror_type`: assigned if `company` is the o
 - **`other`**
 
 Assigned first to entities in `TSOSI-type-entities.csv` whose `tsosi_type` is not `lib_consort` or `funder`, and second to any TSOSI entity that doesn't match any of the rules above.
+
+
+## memo process
+
+- run `main.py`
+- verify new entries in files that finish with `possible funders/consortia` 
+- if there is indeed new consort/funder, manually add them to `TSOSI-type-entities.csv` (respect col structure)
+- ping CTO ;)
+
 
 ## Disclaimer and context
 

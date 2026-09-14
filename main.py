@@ -15,19 +15,21 @@ raw_entities = requests.get("https://tsosi.org/api/entities/all?format=json").js
 
 df_raw  = pd.json_normalize(raw_entities)
 
-## 2026-06-20 from TSOSI API, field types correspond to ror_types, make it explicit
-if "types" in df_raw.columns : 
-	df_raw.rename(columns={'types': 'ror_types'}, inplace=True) 
 
 ## add tsosi_link field
-df_raw["tsosi_link"] = "https://tsosi.org/entities/" + df_raw["id"].astype(str)
-
+def get_tsosi_link(identifiers_in) :
+	for item in identifiers_in :
+		value = item.get("value")
+		if value is not None:
+			return f"https://tsosi.org/entities/{value}"
+ 
+df_raw["tsosi_link"] = df_raw["identifiers"].apply(get_tsosi_link)
 print(f"nb of entities {len(df_raw)}")
 
 
 ## ___2___ remove known entities
-df_known_entities = pd.read_csv("TSOSI-types-for-entities.csv", encoding="utf-8")
-print(f"nb of entities w type {len(df_known_entities)}")
+df_known_entities = pd.read_csv("TSOSI-type-entities.csv", encoding="utf-8")
+print(f"nb of entities with already a type {len(df_known_entities)}")
 
 #print(df_known_entities.columns)
 
@@ -54,7 +56,7 @@ df_intermed = df_new_entities[df_new_entities["is_agent"] == True ][["name", "co
 
 output_results(
 	df_intermed, 
-	f"{today_date}--possible-consortia.csv"
+	f"{today_date}--possible-consortia.md"
 	)
 
 
@@ -84,6 +86,6 @@ df_possible_funders.drop_duplicates(subset=["id"], keep="first", inplace = True)
 ## just change file name extension to produce csv or md
 output_results(
 	df_possible_funders, 
-	f"{today_date}--possible-funders.md"
+	f"{today_date}--possible-funders.csv"
 	)
 
