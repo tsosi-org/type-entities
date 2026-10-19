@@ -2,15 +2,20 @@ import requests, pandas as pd
 
 def flatten_entities(item) :
     """
-    output one field per identifier ror_id and wiki_id
+    output one field per identifier ror_id and wiki_id & tsosi_id
     """
     if item.get("identifiers") :
         for ids in item["identifiers"] : 
             if ids["registry"] == "ror" : 
                 item["ror_id"] = ids["value"]
+            
             if ids["registry"] == "wikidata" : 
                 item["wiki_id"] = ids["value"]
+            
+            if ids["registry"] == "tsosi" :
+                item["tsosi_id"] = ids["value"]
         return item
+
 
     # memo to call [flatten_entities(item) for item in raw_entities]
 
